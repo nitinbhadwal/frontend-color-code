@@ -17,10 +17,11 @@ describe("Color code component data", () => {
   });
 
   // Test Case 2
-  it("Catch the unique color code element and 32768 count", () => {
-    axios.get.mockImplementationOnce(() => Promise.resolve(data));
-    const colorArray = [...new Set(data.response)];
-    expect(colorArray.length).toEqual(32768);
+  it("Catch the total unique color count", async () => {
+    const payload = { total: 32768 };
+    axios.get = jest.fn().mockResolvedValue(payload);
+    const callingAPI = await getData();
+    expect(callingAPI).toEqual(payload);
   });
 
   // Test Case 3
